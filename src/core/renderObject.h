@@ -5,8 +5,16 @@
 #ifndef PROJECT_RENDEROBJECT_H
 #define PROJECT_RENDEROBJECT_H
 
+class RenderObject {
+private:
+    int typeId;
 
-class renderObject {
+public:
+    unsigned int VAO, VBO;
+
+    RenderObject();
+    virtual void render() = 0;
+    ~RenderObject();
 
 };
 

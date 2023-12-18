@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-project(project)
+project(Project)
 
 set(GLFW_H /opt/homebrew/Cellar/glfw/3.3.8/include)
 set(GLEW_H /opt/homebrew/Cellar/glew/2.2.0_1/include)
@@ -16,12 +16,17 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB_RECURSE src_LIB src/3rd-party/*)
 add_library(LIB STATIC ${src_LIB})
 
-add_executable(Project src/main.cpp)
+# 配置核心代码
+file(GLOB_RECURSE src_Core src/core/* src/utils/*)
+
+include_directories(./src/ ./src/core/)
+
+add_executable(Project src/main.cpp ${src_Core})
 target_link_libraries(Project LIB)
 
 # 构建时复制Shader
-set(SHADER_SOURCE_DIR \"${CMAKE_SOURCE_DIR}/src/shader\")
-set(SHADER_BINARY_DIR \"${CMAKE_BINARY_DIR}/shader\")
+set(SHADER_SOURCE_DIR \"${CMAKE_SOURCE_DIR}/src/shaders\")
+set(SHADER_BINARY_DIR \"${CMAKE_BINARY_DIR}/shaders\")
 add_custom_target(CopyShaders ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${SHADER_SOURCE_DIR}

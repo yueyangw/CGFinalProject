@@ -5,12 +5,17 @@
 #ifndef PROJECT_EXAMPLETRIANGLE_H
 #define PROJECT_EXAMPLETRIANGLE_H
 
+#include <core/renderObject.h>
+#include <utils/shader.h>
 
+class Triangle : public RenderObject {
+private:
+    Shader* shader;
 
-class exampleTriangle {
-
+public:
+    Triangle();
+    void render() override;
 };
-
 
 
 #endif //PROJECT_EXAMPLETRIANGLE_H

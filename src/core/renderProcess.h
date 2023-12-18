@@ -2,13 +2,24 @@
 // Created by York Wu on 2023/12/18.
 //
 
-#ifndef PROJECT_MAINPROCESS_H
-#define PROJECT_MAINPROCESS_H
+#ifndef PROJECT_RENDERPROCESS_H
+#define PROJECT_RENDERPROCESS_H
 
+#include <vector>
+#include <core/renderObject.h>
 
-class mainProcess {
+using std::vector;
 
+class RenderProcess {
+private:
+    double deltaTime;
+    int windowWidth, windowHeight;
+    vector<RenderObject*> objectList;
+
+public:
+    RenderProcess(int w, int h);
+    void doRenderStep(double deltaTime);
 };
 
 
-#endif //PROJECT_MAINPROCESS_H
+#endif //PROJECT_RENDERPROCESS_H

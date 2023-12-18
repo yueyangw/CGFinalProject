@@ -12,7 +12,7 @@ class Shader {
 public:
     unsigned int ID;
 
-    // constructor generates the shader on the fly
+    // constructor generates the shaders on the fly
     // ------------------------------------------------------------------------
     Shader(const char *vertexPath, const char *fragmentPath) {
         // 1. retrieve the vertex/fragment source code from filePath
@@ -45,7 +45,7 @@ public:
         const char *fShaderCode = fragmentCode.c_str();
         // 2. compile shaders
         unsigned int vertex, fragment;
-        // vertex shader
+        // vertex shaders
         vertex = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex, 1, &vShaderCode, NULL);
         glCompileShader(vertex);
@@ -55,7 +55,7 @@ public:
         glShaderSource(fragment, 1, &fShaderCode, NULL);
         glCompileShader(fragment);
         checkCompileErrors(fragment, "FRAGMENT");
-        // shader Program
+        // shaders Program
         ID = glCreateProgram();
         glAttachShader(ID, vertex);
         glAttachShader(ID, fragment);
@@ -66,7 +66,7 @@ public:
         glDeleteShader(fragment);
     }
 
-    // activate the shader
+    // activate the shaders
     // ------------------------------------------------------------------------
     void use() {
         glUseProgram(ID);
@@ -89,7 +89,7 @@ public:
     }
 
 private:
-    // utility function for checking shader compilation/linking errors.
+    // utility function for checking shaders compilation/linking errors.
     // ------------------------------------------------------------------------
     static void checkCompileErrors(unsigned int shader, std::string type) {
         int success;

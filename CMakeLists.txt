@@ -19,7 +19,7 @@ add_library(LIB STATIC ${src_LIB})
 # 配置核心代码
 file(GLOB_RECURSE src_Core src/core/* src/utils/*)
 
-include_directories(./src/ ./src/core/)
+include_directories(./src/ ./src/core/ ./src/3rd-party)
 
 add_executable(Project src/main.cpp ${src_Core})
 target_link_libraries(Project LIB)

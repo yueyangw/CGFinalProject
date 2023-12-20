@@ -14,7 +14,8 @@ set(CMAKE_CXX_STANDARD 17)
 #set(src_LIB src/3rd-party/*)
 # 配置第三方库
 file(GLOB_RECURSE src_LIB src/3rd-party/*)
-add_library(LIB STATIC ${src_LIB})
+add_library(LIB STATIC ${src_LIB}
+        src/core/floor.cpp)
 
 # 配置核心代码
 file(GLOB_RECURSE src_Core src/core/* src/utils/*)

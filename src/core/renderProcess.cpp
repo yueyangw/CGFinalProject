@@ -5,12 +5,15 @@
 #include <glad/glad.h>
 #include <core/renderObject.h>
 #include <core/renderProcess.h>
-#include <core/exampleTriangle.h>
+//#include <core/exampleTriangle.h>
+#include <core/floor.h>
 
 RenderProcess::RenderProcess(int w, int h) : windowWidth(w), windowHeight(h) {
     deltaTime = 0;
-    RenderObject* triangle = new Triangle();
-    objectList.push_back(triangle);
+//    RenderObject* triangle = new Triangle();
+    RenderObject* floor = new Floor();
+//    objectList.push_back(triangle);
+    objectList.push_back(floor);
 }
 
 void RenderProcess::doRenderStep(double d) {

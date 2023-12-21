@@ -18,6 +18,7 @@ private:
 
 public:
     RenderProcess(int w, int h);
+    ~RenderProcess();
     void doRenderStep(double deltaTime);
 };
 

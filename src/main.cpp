@@ -37,6 +37,8 @@ int main() {
         return -1;
     }
 
+    glEnable(GL_DEPTH_TEST);
+
     auto* render = new RenderProcess(SCR_WIDTH, SCR_HEIGHT);
 
     double lastTime = glfwGetTime();

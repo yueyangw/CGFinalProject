@@ -2,8 +2,8 @@
 // Created by York Wu on 2023/12/18.
 //
 
-#ifndef PROJECT_EXAMPLETRIANGLE_H
-#define PROJECT_EXAMPLETRIANGLE_H
+#ifndef PROJECT_EXAMPLECUBE_H
+#define PROJECT_EXAMPLECUBE_H
 
 #include <core/renderObject.h>
 #include <glm/glm.hpp>
@@ -11,14 +11,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <utils/shader.h>
 
-class Triangle : public RenderObject {
+class Cube : public RenderObject {
 private:
     Shader* shader;
+    unsigned int texture1, texture2;
 
 public:
-    Triangle();
+    Cube();
     void render() override;
-    void calc();
 };
 
-#endif  // PROJECT_EXAMPLETRIANGLE_H
+#endif  // PROJECT_EXAMPLECUBE_H

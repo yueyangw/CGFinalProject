@@ -13,11 +13,10 @@
 
 class Cube : public RenderObject {
 private:
-    Shader* shader;
     unsigned int texture1, texture2;
 
 public:
-    Cube();
+    Cube(Camera*, glm::mat4 *p);
     void render() override;
 };
 

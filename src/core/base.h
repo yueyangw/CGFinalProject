@@ -13,11 +13,10 @@
 
 class Base : public RenderObject {
 private:
-    Shader* shader;
     unsigned int texture1, texture2;
 
 public:
-    Base();
+    Base(Camera*, glm::mat4 *p);
     void render() override;
 };
 

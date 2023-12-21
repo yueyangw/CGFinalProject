@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-Cube::Cube() {
+Cube::Cube(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
     shader = new Shader("shaders/6.2.coordanite.vert", "shaders/6.2.coordanite.frag");
     float vertices[] = {
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,

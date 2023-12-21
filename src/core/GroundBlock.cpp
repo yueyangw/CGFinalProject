@@ -4,9 +4,9 @@
 
 #include <GroundBlock.h>
 
-GroundBlock::GroundBlock(float s, float r) {
+void GroundBlock::init(float s, float r) {
     genBuffer(innerVAO, innerVBO);
-    this->shader = new Shader("shaders/3.3.shader.vert", "shaders/3.3.shader.frag");
+    this->shader = new Shader("shaders/ground.vert", "shaders/ground.frag");
     animateRate = 0.95f;
     animateDir = -1;
     isAnimate = false;
@@ -70,18 +70,25 @@ void GroundBlock::setIsAnimate(bool isAnimate) {
     GroundBlock::isAnimate = isAnimate;
 }
 
-GroundBlock::GroundBlock() : GroundBlock(1.0f, 0.1f) {
+GroundBlock::GroundBlock(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
+    init(1.0f, 0.1f);
 }
 
-Shader *GroundBlock::getShader() {
-    return this->shader;
+GroundBlock::GroundBlock(Camera* c, glm::mat4 *p, float scale, float radius) : RenderObject(c, p) {
+    init(scale, radius);
 }
 
 void GroundBlock::render() {
     // draw outer border
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    this->shader->use();
+
+    shader->use();
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, this->getPosition());
+    shader->setMat4("model", model);
+    setVPMatrix();
+
     glDrawArrays(GL_LINE_LOOP, 0, 8);
     glBindVertexArray(0);
 
@@ -112,8 +119,11 @@ void GroundBlock::render() {
         };
 
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(innerPolygon), innerPolygon);
-
         shader->use();
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, this->getPosition());
+        shader->setMat4("model", model);
+        setVPMatrix();
         glDrawArrays(GL_LINE_LOOP, 0, 8);
     }
 }

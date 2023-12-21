@@ -6,15 +6,15 @@
 #include <core/renderObject.h>
 #include <core/renderProcess.h>
 #include <core/base.h>
-#include <core/exampleTriangle.h>
-#include <core/floor.h>
 #include <core/GroundBlock.h>
 #include <core/exampleCube.h>
 
-RenderProcess::RenderProcess(int w, int h) : windowWidth(w), windowHeight(h) {
+RenderProcess::RenderProcess(int w, int h, Camera* c) : windowWidth(w), windowHeight(h) {
     deltaTime = 0;
+    camera = c;
+    projection = new glm::mat4(glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f));
 //    RenderObject* triangle = new Triangle();
-    GroundBlock* floor = new GroundBlock();
+    GroundBlock* floor = new GroundBlock(camera, projection);
     floor->setIsAnimate(true);
 //    objectList.push_back(triangle);
     objectList.push_back(floor);
@@ -42,9 +42,9 @@ RenderProcess::RenderProcess(int w, int h) : windowWidth(w), windowHeight(h) {
     };
 
 //    Cube* cube = new Cube[10];
-    Base* base = new Base[1];
+    Base* base = new Base(camera, projection);
     base->setPosition(cubePositions[0]);
-    objectList.push_back(&base[0]);
+    objectList.push_back(base);
 }
 
 void RenderProcess::doRenderStep(double d) {
@@ -54,6 +54,9 @@ void RenderProcess::doRenderStep(double d) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     for(auto object : objectList) {
+        if (dynamic_cast<GroundBlock*>(object)) {
+            object->setDeltaTime(d);
+        }
         object->render();
     }
 }
@@ -62,4 +65,9 @@ RenderProcess::~RenderProcess() {
     for (auto obj : objectList) {
         delete obj;
     }
+}
+
+void RenderProcess::updatePerspective(int w, int h) {
+    this->windowWidth = w, this->windowHeight = h;
+    *projection = glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f);
 }

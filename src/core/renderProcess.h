@@ -14,12 +14,20 @@ class RenderProcess {
 private:
     double deltaTime;
     int windowWidth, windowHeight;
-    vector<RenderObject*> objectList;
+    vector<RenderObject *> objectList;
 
 public:
-    RenderProcess(int w, int h);
+    Camera *camera;
+    glm::mat4 *projection;
+
+public:
+    RenderProcess(int w, int h, Camera* c);
+
     ~RenderProcess();
+
     void doRenderStep(double deltaTime);
+
+    void updatePerspective(int w, int h);
 };
 
 

@@ -8,21 +8,34 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <utils/camera.h>
+#include <utils/shader.h>
 
 class RenderObject {
 private:
     int typeId;
     double deltaTime;
-public:
-    double getDeltaTime() const;
-
-public:
-    void setDeltaTime(double deltaTime);
-
-private:
     glm::vec3 position, scale;
 
 public:
+    unsigned int VAO, VBO;
+
+    glm::mat4 *projection;
+
+    Shader *shader;
+
+    Camera *camera;
+
+protected:
+    void setVPMatrix();
+
+public:
+    RenderObject(Camera *, glm::mat4 *z);
+
+    virtual void render() = 0;
+
+    virtual ~RenderObject();
+
     const glm::vec3 &getPosition() const;
 
     void setPosition(const glm::vec3 &position);
@@ -33,12 +46,9 @@ public:
 
     void genBuffer(unsigned int &VAO, unsigned int &VBO);
 
-public:
-    unsigned int VAO, VBO;
+    double getDeltaTime() const;
 
-    RenderObject();
-    virtual void render() = 0;
-    virtual ~RenderObject();
+    void setDeltaTime(double deltaTime);
 
 };
 

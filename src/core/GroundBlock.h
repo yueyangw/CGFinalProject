@@ -11,20 +11,18 @@
 class GroundBlock : public RenderObject{
 private:
     float scale, radius;
-    Shader* shader;
     unsigned int innerVAO, innerVBO;
     float animateRate;
     int animateDir;
     bool isAnimate;
 
 public:
-    GroundBlock();
-    GroundBlock(float scale, float radius);
+    GroundBlock(Camera*, glm::mat4 *projection);
+    GroundBlock(Camera*, glm::mat4 *projection, float scale, float radius);
+    void init(float, float);
     void render() override;
 
     void setIsAnimate(bool isAnimate);
-
-    Shader* getShader();
 };
 
 

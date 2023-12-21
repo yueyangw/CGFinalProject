@@ -5,7 +5,9 @@
 #include <glad/glad.h>
 #include <core/renderObject.h>
 
-RenderObject::RenderObject() {
+RenderObject::RenderObject(Camera* c, glm::mat4 *p) {
+    camera = c;
+    projection = p;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -14,6 +16,12 @@ RenderObject::RenderObject() {
 RenderObject::~RenderObject() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+}
+
+void RenderObject::setVPMatrix() {
+    shader->setMat4("projection", *projection);
+    glm::mat4 view = camera->GetViewMatrix();
+    shader->setMat4("view", view);
 }
 
 void RenderObject::genBuffer(unsigned int &VAO, unsigned int &VBO) {

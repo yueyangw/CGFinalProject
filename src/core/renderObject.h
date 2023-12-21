@@ -12,6 +12,14 @@
 class RenderObject {
 private:
     int typeId;
+    double deltaTime;
+public:
+    double getDeltaTime() const;
+
+public:
+    void setDeltaTime(double deltaTime);
+
+private:
     glm::vec3 position, scale;
 
 public:
@@ -22,6 +30,8 @@ public:
     const glm::vec3 &getScale() const;
 
     void setScale(const glm::vec3 &scale);
+
+    void genBuffer(unsigned int &VAO, unsigned int &VBO);
 
 public:
     unsigned int VAO, VBO;

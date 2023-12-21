@@ -16,6 +16,11 @@ RenderObject::~RenderObject() {
     glDeleteBuffers(1, &VBO);
 }
 
+void RenderObject::genBuffer(unsigned int &VAO, unsigned int &VBO) {
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+}
+
 const glm::vec3 &RenderObject::getPosition() const {
     return position;
 }
@@ -30,4 +35,12 @@ const glm::vec3 &RenderObject::getScale() const {
 
 void RenderObject::setScale(const glm::vec3 &scale) {
     RenderObject::scale = scale;
+}
+
+void RenderObject::setDeltaTime(double deltaTime) {
+    RenderObject::deltaTime = deltaTime;
+}
+
+double RenderObject::getDeltaTime() const {
+    return deltaTime;
 }

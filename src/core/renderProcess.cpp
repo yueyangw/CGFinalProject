@@ -57,8 +57,9 @@ void RenderProcess::doRenderStep(double d) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for(auto object : objectList) {
-        if (dynamic_cast<GroundBlock*>(object)) {
+    for (auto object: objectList) {
+        if (dynamic_cast<GroundBlock *>(object) &&
+            dynamic_cast<Ground *>(object)) {
             object->setDeltaTime(d);
         }
         object->render();
@@ -66,12 +67,12 @@ void RenderProcess::doRenderStep(double d) {
 }
 
 RenderProcess::~RenderProcess() {
-    for (auto obj : objectList) {
+    for (auto obj: objectList) {
         delete obj;
     }
 }
 
 void RenderProcess::updatePerspective(int w, int h) {
     this->windowWidth = w, this->windowHeight = h;
-    *projection = glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f);
+    *projection = glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f);
 }

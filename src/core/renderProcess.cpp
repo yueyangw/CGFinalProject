@@ -8,6 +8,7 @@
 #include <core/base.h>
 #include <core/Ground.h>
 #include <core/exampleCube.h>
+#include <core/LightingCube.h>
 
 RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
     deltaTime = 0;
@@ -32,19 +33,22 @@ RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHe
 //        glm::vec3( 1.5f,  0.2f, -1.5f),
 //        glm::vec3(-1.3f,  1.0f, -1.5f)
 //    };
-//    Cube **cubes = new Cube*[10];
 //
+//    Cube* cube = new Cube[10];
 //    for (int i = 0; i < 10; i++) {
-//        cubes[i] = new Cube(camera, projection);
-//        cubes[i]->setPosition(cubePositions[i]);
-//        objectList.push_back((RenderObject*)cubes[i]);
+//        cube[i].setPosition(cubePositions[i]);
+//        objectList.push_back(&cube[i]);
 //    }
-//    glm::vec3 basePositions[] = {
+//    objectList.push_back(floor);
+//    glm::vec3 cubePositions[] = {
 //        glm::vec3( 0.0f,  0.0f,  0.0f),
 //    };
+//
+////    Cube* cube = new Cube[10];
 //    Base* base = new Base(camera, projection);
-//    base->setPosition(basePositions[0]);
-//    objectList.push_back(base);
+//    base->setPosition(cubePositions[0]);
+//    LightingCube* lightingCube = new LightingCube(camera, projection);
+//    objectList.push_back(lightingCube);
 }
 
 void RenderProcess::doRenderStep(double d) {
@@ -53,9 +57,8 @@ void RenderProcess::doRenderStep(double d) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for (auto object: objectList) {
-        if (dynamic_cast<GroundBlock *>(object) ||
-            dynamic_cast<Ground *>(object)) {
+    for(auto object : objectList) {
+        if (dynamic_cast<GroundBlock*>(object)) {
             object->setDeltaTime(d);
         }
         object->render();
@@ -63,12 +66,12 @@ void RenderProcess::doRenderStep(double d) {
 }
 
 RenderProcess::~RenderProcess() {
-    for (auto obj: objectList) {
+    for (auto obj : objectList) {
         delete obj;
     }
 }
 
 void RenderProcess::updatePerspective(int w, int h) {
     this->windowWidth = w, this->windowHeight = h;
-    *projection = glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f);
+    *projection = glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f);
 }

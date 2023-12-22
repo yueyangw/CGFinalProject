@@ -23,7 +23,10 @@ include_directories(./src/ ./src/core/ ./src/3rd-party)
 
 add_executable(Project src/main.cpp ${src_Core}
         src/core/base.cpp
-        src/core/base.h)
+        src/core/base.h
+        src/core/LightingCube.cpp
+        src/core/LightingCube.h
+)
 target_link_libraries(Project LIB)
 
 # 构建时复制Shader

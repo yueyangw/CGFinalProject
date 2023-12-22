@@ -3,12 +3,13 @@
 //
 
 #include <GroundBlock.h>
+#include <cmath>
 
 void GroundBlock::init(float s, float r) {
     genBuffer(innerVAO, innerVBO);
     this->shader = new Shader("shaders/ground.vert", "shaders/ground.frag");
-    animateRate = 0.95f;
-    animateDir = -1;
+    animateRate = 0.01f;
+    animateSpeed = 0.5f;
     isAnimate = false;
     scale = s, radius = r;
 
@@ -66,10 +67,6 @@ void GroundBlock::init(float s, float r) {
     glBindVertexArray(0);
 }
 
-void GroundBlock::setIsAnimate(bool isAnimate) {
-    GroundBlock::isAnimate = isAnimate;
-}
-
 GroundBlock::GroundBlock(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
     init(1.0f, 0.1f);
 }
@@ -86,6 +83,7 @@ void GroundBlock::render() {
     shader->use();
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, this->getPosition());
+    model = glm::rotate(model, (float)M_PI/2, glm::vec3(1.0f, 0.0f, 0.0f));
     shader->setMat4("model", model);
     setVPMatrix();
 
@@ -99,14 +97,10 @@ void GroundBlock::render() {
 
         float x = scale * (0.5f - radius), y = scale * 0.5f;
         x *= animateRate, y *= animateRate;
-        if (animateRate >= 0.95f) {
-            animateDir = -1;
-            animateRate = 0.95f;
-        } else if (animateRate <= 0.2f) {
-            animateDir = 1;
-            animateRate = 0.2f;
+        if (animateRate >= 0.8f) {
+            isAnimate = false;
         }
-        animateRate += animateDir * getDeltaTime() * 0.2f;
+        animateRate += getDeltaTime() * animateSpeed;
         float innerPolygon[] = {
                 x, y, 0.0f, 1.0f, 1.0f, 1.0f,
                 -x, y, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -122,8 +116,25 @@ void GroundBlock::render() {
         shader->use();
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, this->getPosition());
+        model = glm::rotate(model, (float)M_PI/2, glm::vec3(1.0f, 0.0f, 0.0f));
         shader->setMat4("model", model);
         setVPMatrix();
         glDrawArrays(GL_LINE_LOOP, 0, 8);
     }
+}
+
+void GroundBlock::emitAnimate() {
+    isAnimate = true;
+    animateRate = 0.01f;
+}
+
+void GroundBlock::setInBlock(bool inBlock) {
+    if (this->inBlock == false && inBlock == true) {
+        emitAnimate();
+    }
+    this->inBlock = inBlock;
+}
+
+void GroundBlock::setAnimateSpeed(float animateSpeed) {
+    GroundBlock::animateSpeed = animateSpeed;
 }

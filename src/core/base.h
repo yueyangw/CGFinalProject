@@ -2,8 +2,8 @@
 // Created by Joyce on 2023/12/18.
 //
 
-#ifndef PROJECT_EXAMPLECUBE_H
-#define PROJECT_EXAMPLECUBE_H
+#ifndef PROJECT_BASE_H
+#define PROJECT_BASE_H
 
 #include <core/renderObject.h>
 #include <glm/glm.hpp>
@@ -20,4 +20,4 @@ public:
     void render() override;
 };
 
-#endif  // PROJECT_EXAMPLECUBE_H
+#endif  // PROJECT_BASE_H

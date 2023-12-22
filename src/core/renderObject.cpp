@@ -11,6 +11,7 @@ RenderObject::RenderObject(Camera* c, glm::mat4 *p) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     position = glm::vec3(0.0f, 0.0f, 0.0f);
+    scale = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 RenderObject::~RenderObject() {

@@ -30,7 +30,7 @@ protected:
     void setVPMatrix();
 
 public:
-    RenderObject(Camera *, glm::mat4 *z);
+    RenderObject(Camera *, glm::mat4 *p);
 
     virtual void render() = 0;
 

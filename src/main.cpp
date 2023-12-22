@@ -16,7 +16,7 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 // settings
 const unsigned int SCR_WIDTH = 1000;
 const unsigned int SCR_HEIGHT = 750;
-const glm::vec3 cameraInitPos = glm::vec3(0.0f, 0.0f, 3.0f);
+const glm::vec3 cameraInitPos = glm::vec3(0.0f, 1.5f, 3.0f);
 
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;

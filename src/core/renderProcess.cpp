@@ -6,18 +6,20 @@
 #include <core/renderObject.h>
 #include <core/renderProcess.h>
 #include <core/base.h>
-#include <core/GroundBlock.h>
+#include <core/Ground.h>
 #include <core/exampleCube.h>
 
-RenderProcess::RenderProcess(int w, int h, Camera* c) : windowWidth(w), windowHeight(h) {
+RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
     deltaTime = 0;
     camera = c;
-    projection = new glm::mat4(glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f));
+    projection = new glm::mat4(glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f));
 //    RenderObject* triangle = new Triangle();
-    GroundBlock* floor = new GroundBlock(camera, projection);
-    floor->setIsAnimate(true);
-//    objectList.push_back(triangle);
-    objectList.push_back(floor);
+//    GroundBlock* floor = new GroundBlock(camera, projection);
+//    floor->setIsAnimate(true);
+////    objectList.push_back(triangle);
+//    objectList.push_back(floor);
+    Ground *ground = new Ground(camera, projection);
+    objectList.push_back(ground);
 //    glm::vec3 cubePositions[] = {
 //        glm::vec3( 0.0f,  0.0f,  0.0f),
 //        glm::vec3( 2.0f,  5.0f, -15.0f),
@@ -30,21 +32,19 @@ RenderProcess::RenderProcess(int w, int h, Camera* c) : windowWidth(w), windowHe
 //        glm::vec3( 1.5f,  0.2f, -1.5f),
 //        glm::vec3(-1.3f,  1.0f, -1.5f)
 //    };
+//    Cube **cubes = new Cube*[10];
 //
-//    Cube* cube = new Cube[10];
 //    for (int i = 0; i < 10; i++) {
-//        cube[i].setPosition(cubePositions[i]);
-//        objectList.push_back(&cube[i]);
+//        cubes[i] = new Cube(camera, projection);
+//        cubes[i]->setPosition(cubePositions[i]);
+//        objectList.push_back((RenderObject*)cubes[i]);
 //    }
-//    objectList.push_back(floor);
-    glm::vec3 cubePositions[] = {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-    };
-
-//    Cube* cube = new Cube[10];
-    Base* base = new Base(camera, projection);
-    base->setPosition(cubePositions[0]);
-    objectList.push_back(base);
+//    glm::vec3 basePositions[] = {
+//        glm::vec3( 0.0f,  0.0f,  0.0f),
+//    };
+//    Base* base = new Base(camera, projection);
+//    base->setPosition(basePositions[0]);
+//    objectList.push_back(base);
 }
 
 void RenderProcess::doRenderStep(double d) {
@@ -53,8 +53,9 @@ void RenderProcess::doRenderStep(double d) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for(auto object : objectList) {
-        if (dynamic_cast<GroundBlock*>(object)) {
+    for (auto object: objectList) {
+        if (dynamic_cast<GroundBlock *>(object) ||
+            dynamic_cast<Ground *>(object)) {
             object->setDeltaTime(d);
         }
         object->render();
@@ -62,12 +63,12 @@ void RenderProcess::doRenderStep(double d) {
 }
 
 RenderProcess::~RenderProcess() {
-    for (auto obj : objectList) {
+    for (auto obj: objectList) {
         delete obj;
     }
 }
 
 void RenderProcess::updatePerspective(int w, int h) {
     this->windowWidth = w, this->windowHeight = h;
-    *projection = glm::perspective(glm::radians(camera->Zoom), (float)w / (float)h, 0.1f, 100.0f);
+    *projection = glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f);
 }

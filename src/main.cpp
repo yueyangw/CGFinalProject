@@ -68,6 +68,7 @@ int main() {
 
         processInput(window);
 
+        camera->updateJumpPosition(deltaTime);
         renderProcess->doRenderStep(deltaTime);
 
         glfwSwapBuffers(window);
@@ -94,6 +95,8 @@ void processInput(GLFWwindow *window) {
         camera->ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera->ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        camera->ProcessKeyboard(UP, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes

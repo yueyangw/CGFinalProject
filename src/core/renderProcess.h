@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <core/renderObject.h>
+#include <core/skybox.h>
 
 using std::vector;
 
@@ -14,7 +15,10 @@ class RenderProcess {
 private:
     double deltaTime;
     int windowWidth, windowHeight;
+    Skybox *skybox;
     vector<RenderObject *> objectList;
+    void init(Camera *c, int w, int h);
+    void initObjects();
 
 public:
     Camera *camera;

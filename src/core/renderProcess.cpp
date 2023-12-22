@@ -9,11 +9,49 @@
 #include <core/Ground.h>
 #include <core/exampleCube.h>
 #include <core/LightingCube.h>
+#include <core/skybox.h>
 
 RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
+    init(c, w, h);
+    initObjects();
+}
+
+void RenderProcess::doRenderStep(double d) {
+    this->deltaTime = d;
+
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    skybox->render();
+
+    for (auto object: objectList) {
+        if (dynamic_cast<GroundBlock *>(object) ||
+            dynamic_cast<Ground *>(object)) {
+            object->setDeltaTime(d);
+        }
+        object->render();
+    }
+}
+
+RenderProcess::~RenderProcess() {
+    for (auto obj: objectList) {
+        delete obj;
+    }
+}
+
+void RenderProcess::updatePerspective(int w, int h) {
+    this->windowWidth = w, this->windowHeight = h;
+    *projection = glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f);
+}
+
+void RenderProcess::init(Camera *c, int w, int h) {
     deltaTime = 0;
     camera = c;
     projection = new glm::mat4(glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f));
+    skybox = new Skybox(camera, projection);
+}
+
+void RenderProcess::initObjects() {
 //    RenderObject* triangle = new Triangle();
 //    GroundBlock* floor = new GroundBlock(camera, projection);
 //    floor->setIsAnimate(true);
@@ -49,30 +87,4 @@ RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHe
 //    base->setPosition(cubePositions[0]);
 //    LightingCube* lightingCube = new LightingCube(camera, projection);
 //    objectList.push_back(lightingCube);
-}
-
-void RenderProcess::doRenderStep(double d) {
-    this->deltaTime = d;
-
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    for (auto object: objectList) {
-        if (dynamic_cast<GroundBlock *>(object) &&
-            dynamic_cast<Ground *>(object)) {
-            object->setDeltaTime(d);
-        }
-        object->render();
-    }
-}
-
-RenderProcess::~RenderProcess() {
-    for (auto obj: objectList) {
-        delete obj;
-    }
-}
-
-void RenderProcess::updatePerspective(int w, int h) {
-    this->windowWidth = w, this->windowHeight = h;
-    *projection = glm::perspective(glm::radians(camera->Zoom), (float) w / (float) h, 0.1f, 100.0f);
 }

@@ -21,7 +21,6 @@ CubeGroup::CubeGroup(Camera *c, glm::mat4 *p) : RenderObject(c, p) {
         LightingCube *lightingCube = new LightingCube(camera, projection);
         lightingCube->setScale(scaleData[i]);
         lightingCube->setRotate(rotate[i]);
-        printf("%lf",lightingCube->getScale()[0]);
         cubes.push_back(lightingCube);
     }
 }

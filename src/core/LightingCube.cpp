@@ -91,7 +91,6 @@ void LightingCube::render() {
             }
         }
     }
-    printf("%lf",getScale()[0]);
     calculateCubePositions();
     for (int i = 0; i < numCubes; ++i) {
         for(int j =0; j < numVertices; ++j) {
@@ -135,10 +134,10 @@ void LightingCube::render() {
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    unsigned char *data = stbi_load("resources/textures/container.jpg", &width, &height,
+    unsigned char *data = stbi_load("resources/textures/Quartz.png", &width, &height,
                                     &nrChannels, 0);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     } else {
         std::cout << "Failed to load texture" << std::endl;

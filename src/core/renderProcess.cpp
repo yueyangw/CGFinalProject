@@ -7,8 +7,9 @@
 #include <core/renderProcess.h>
 #include <core/base.h>
 #include <core/Ground.h>
-#include <core/exampleCube.h>
-#include <core/LightingCube.h>
+//#include <core/exampleCube.h>
+#include <core/CubeGroup.h>
+
 #include <core/skybox.h>
 
 RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
@@ -29,6 +30,7 @@ void RenderProcess::doRenderStep(double d) {
             dynamic_cast<Ground *>(object)) {
             object->setDeltaTime(d);
         }
+
         object->render();
     }
 }
@@ -72,7 +74,7 @@ void RenderProcess::initObjects() {
 //        glm::vec3(-1.3f,  1.0f, -1.5f)
 //    };
 //
-//    Cube* cube = new Cube[10];
+//    CubeGroup* cube = new CubeGroup[10];
 //    for (int i = 0; i < 10; i++) {
 //        cube[i].setPosition(cubePositions[i]);
 //        objectList.push_back(&cube[i]);
@@ -82,9 +84,10 @@ void RenderProcess::initObjects() {
 //        glm::vec3( 0.0f,  0.0f,  0.0f),
 //    };
 //
-////    Cube* cube = new Cube[10];
+////    CubeGroup* cube = new CubeGroup[10];
 //    Base* base = new Base(camera, projection);
 //    base->setPosition(cubePositions[0]);
-//    LightingCube* lightingCube = new LightingCube(camera, projection);
-//    objectList.push_back(lightingCube);
+
+    CubeGroup* cube = new CubeGroup(camera, projection);
+    objectList.push_back(cube);
 }

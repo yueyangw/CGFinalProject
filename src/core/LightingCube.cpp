@@ -75,6 +75,10 @@ float transformedVertices[36* 18 * 5];  // 存储变换后的顶点数组
 
 
 LightingCube::LightingCube(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
+
+}
+
+void LightingCube::render() {
     shader = new Shader("shaders/6.2.coordanite.vert", "shaders/6.2.coordanite.frag");
 
     for (int copyIndex = 0; copyIndex < numCubes; ++copyIndex) {
@@ -87,15 +91,16 @@ LightingCube::LightingCube(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
             }
         }
     }
+    printf("%lf",getScale()[0]);
     calculateCubePositions();
     for (int i = 0; i < numCubes; ++i) {
         for(int j =0; j < numVertices; ++j) {
             int vertexIndex = i * 36 * 5 + j * 5;
-            transformedVertices[vertexIndex] = verticesAll[vertexIndex] + cubePositions[i * 3];
-            transformedVertices[vertexIndex + 1] = verticesAll[vertexIndex + 1] +cubePositions[i * 3 + 1];
-            transformedVertices[vertexIndex + 2] = verticesAll[vertexIndex + 2] + cubePositions[i * 3 + 2];
-            transformedVertices[vertexIndex + 3] = verticesAll[vertexIndex + 3];  // 复制纹理坐标 u
-            transformedVertices[vertexIndex + 4] = verticesAll[vertexIndex + 4];  // 复制纹理坐标 v
+            transformedVertices[vertexIndex] = getScale()[0]*(verticesAll[vertexIndex] + cubePositions[i * 3]);
+            transformedVertices[vertexIndex + 1] = getScale()[1]*(verticesAll[vertexIndex + 1] +cubePositions[i * 3 + 1]);
+            transformedVertices[vertexIndex + 2] = getScale()[2]*(verticesAll[vertexIndex + 2] + cubePositions[i * 3 + 2]);
+            transformedVertices[vertexIndex + 3] = getScale()[0]*(verticesAll[vertexIndex + 3]);  // 复制纹理坐标 u
+            transformedVertices[vertexIndex + 4] = getScale()[1]*(verticesAll[vertexIndex + 4]);  // 复制纹理坐标 v
         }
     }
 
@@ -142,17 +147,16 @@ LightingCube::LightingCube(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
 
     shader->use();
     shader->setInt("texture1", 0);
-}
-
-void LightingCube::render() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
+
+
 
     shader->use();
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, this->getPosition());
-    model = glm::rotate(model, (float) glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+    model = glm::rotate(model, (float) glfwGetTime(), rotate);
     shader->setMat4("model", model);
     setVPMatrix();
 
@@ -160,3 +164,10 @@ void LightingCube::render() {
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36*18);
 }
+
+void LightingCube::setRotate(const glm::vec3 &rotate) {
+    LightingCube::rotate = rotate;
+}
+
+
+

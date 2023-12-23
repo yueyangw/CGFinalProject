@@ -13,7 +13,12 @@
 
 class LightingCube : public RenderObject {
 private:
-    unsigned int texture1, texture2;
+    glm::vec3 rotate;
+public:
+    void setRotate(const glm::vec3 &rotate);
+
+private:
+    unsigned int texture1;
 
 public:
     LightingCube(Camera*, glm::mat4 *p);

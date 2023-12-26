@@ -21,7 +21,7 @@ public:
 private:
     static std::string const &getRoot() {
         static char const *envRoot = getenv("LOGL_ROOT_PATH");
-        static char const *givenRoot = (envRoot != nullptr ? envRoot : "/Users/yorkwu/Learn/Note&HW/计算机图形学/project");
+        static char const *givenRoot = (envRoot != nullptr ? envRoot : "/Users/joyce/Projects/CLionProjects/CGFinalProject/src");
         static std::string root = (givenRoot != nullptr ? givenRoot : "");
         return root;
     }

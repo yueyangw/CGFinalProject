@@ -11,47 +11,47 @@ const float cubeSpacing = 2.0f;
 
 float cubePositions[numCubes * 3];
 float vertices[] = {
-        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-        0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
 
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-        -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
 
-        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
 
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
 
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, -0.5f, -0.5f, 0.1176,0.5647,1.0,
 
-        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
+        -0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, 0.5f, 0.1176,0.5647,1.0,
+        -0.5f, 0.5f, -0.5f, 0.1176,0.5647,1.0
 };
 void calculateCubePositions() {
     for (int i = 0; i < numCubes; ++i) {
@@ -69,8 +69,8 @@ void calculateCubePositions() {
 }
 
 const int numVertices = 36;  // 顶点数量
-float verticesAll[36* 18 * 5];  // 原始顶点数组
-float transformedVertices[36* 18 * 5];  // 存储变换后的顶点数组
+float verticesAll[36* 18 * 6];  // 原始顶点数组
+float transformedVertices[36* 18 * 6];  // 存储变换后的顶点数组
 
 
 
@@ -79,14 +79,14 @@ LightingCube::LightingCube(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
 }
 
 void LightingCube::render() {
-    shader = new Shader("shaders/6.2.coordanite.vert", "shaders/6.2.coordanite.frag");
+    shader = new Shader("shaders/ground.vert", "shaders/ground.frag");
 
     for (int copyIndex = 0; copyIndex < numCubes; ++copyIndex) {
         for (int i = 0; i < numVertices; ++i) {
-            int srcIndex = i * 5;
-            int destIndex = (copyIndex * numVertices + i) * 5;
+            int srcIndex = i * 6;
+            int destIndex = (copyIndex * numVertices + i) * 6;
 
-            for (int j = 0; j < 5; ++j) {
+            for (int j = 0; j < 6; ++j) {
                 verticesAll[destIndex + j] = vertices[srcIndex + j];
             }
         }
@@ -94,12 +94,13 @@ void LightingCube::render() {
     calculateCubePositions();
     for (int i = 0; i < numCubes; ++i) {
         for(int j =0; j < numVertices; ++j) {
-            int vertexIndex = i * 36 * 5 + j * 5;
+            int vertexIndex = i * 36 * 6 + j * 6;
             transformedVertices[vertexIndex] = getScale()[0]*(verticesAll[vertexIndex] + cubePositions[i * 3]);
             transformedVertices[vertexIndex + 1] = getScale()[1]*(verticesAll[vertexIndex + 1] +cubePositions[i * 3 + 1]);
             transformedVertices[vertexIndex + 2] = getScale()[2]*(verticesAll[vertexIndex + 2] + cubePositions[i * 3 + 2]);
-            transformedVertices[vertexIndex + 3] = getScale()[0]*(verticesAll[vertexIndex + 3]);  // 复制纹理坐标 u
-            transformedVertices[vertexIndex + 4] = getScale()[1]*(verticesAll[vertexIndex + 4]);  // 复制纹理坐标 v
+            transformedVertices[vertexIndex + 3] = verticesAll[vertexIndex + 3];
+            transformedVertices[vertexIndex + 4] = verticesAll[vertexIndex + 4];
+            transformedVertices[vertexIndex + 5] = verticesAll[vertexIndex + 5];
         }
     }
 
@@ -115,39 +116,42 @@ void LightingCube::render() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(transformedVertices), transformedVertices, GL_STATIC_DRAW);
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
-    // texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (3 * sizeof(float)));
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+//    // texture coord attribute
+//    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (3 * sizeof(float)));
+//    glEnableVertexAttribArray(1);
 
-    // texture 1
-    // ---------
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
-    int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    unsigned char *data = stbi_load("resources/textures/Quartz.png", &width, &height,
-                                    &nrChannels, 0);
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
-
-    shader->use();
-    shader->setInt("texture1", 0);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture1);
+//    // texture 1
+//    // ---------
+//    glGenTextures(1, &texture1);
+//    glBindTexture(GL_TEXTURE_2D, texture1);
+//    // set the texture wrapping parameters
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    // set texture filtering parameters
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    // load image, create texture and generate mipmaps
+//    int width, height, nrChannels;
+//    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+//    unsigned char *data = stbi_load("resources/textures/Quartz.png", &width, &height,
+//                                    &nrChannels, 0);
+//    if (data) {
+//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+//        glGenerateMipmap(GL_TEXTURE_2D);
+//    } else {
+//        std::cout << "Failed to load texture" << std::endl;
+//    }
+//    stbi_image_free(data);
+//
+//    shader->use();
+//    shader->setInt("texture1", 0);
+//    glActiveTexture(GL_TEXTURE0);
+//    glBindTexture(GL_TEXTURE_2D, texture1);
 
 
 

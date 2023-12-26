@@ -9,6 +9,7 @@
 #include <core/Ground.h>
 //#include <core/exampleCube.h>
 #include <core/CubeGroup.h>
+#include <core/MagmaBlock.h>
 
 #include <core/skybox.h>
 #include <core/bricks.h>
@@ -18,20 +19,18 @@ RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHe
     initObjects();
 }
 
-void RenderProcess::doRenderStep(double d) {
-    this->deltaTime = d;
+void RenderProcess::doRenderStep(double deltaTime, double currentTime) {
+    this->deltaTime = deltaTime;
+    this->currentTime = currentTime;
 
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+//    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     skybox->render();
 
     for (auto object: objectList) {
-        if (dynamic_cast<GroundBlock *>(object) ||
-            dynamic_cast<Ground *>(object)) {
-            object->setDeltaTime(d);
-        }
-
+        object->setDeltaTime(deltaTime);
+        object->setCurrentTime(currentTime);
         object->render();
     }
 }
@@ -94,4 +93,6 @@ void RenderProcess::initObjects() {
 
     Bricks* bricks = new Bricks(camera,projection);
     objectList.push_back(bricks);
+//    MagmaBlock* magmaBlock = new MagmaBlock(camera, projection);
+//    objectList.push_back(magmaBlock);
 }

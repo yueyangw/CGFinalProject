@@ -14,7 +14,13 @@
 class RenderObject {
 private:
     int typeId;
-    double deltaTime;
+    double deltaTime, currentTime;
+public:
+    double getCurrentTime() const;
+
+    void setCurrentTime(double currentTime);
+
+private:
     glm::vec3 position, scale;
 
 public:

@@ -147,9 +147,9 @@ void Bricks::render() {
 
     // load textures
     // -------------
-    diffuseMap = loadTexture(FileSystem::getPath("resources/textures/bricks2.jpg").c_str());
-    normalMap  = loadTexture(FileSystem::getPath("resources/textures/bricks2_normal.jpg").c_str());
-    heightMap  = loadTexture(FileSystem::getPath("resources/textures/bricks2_disp.jpg").c_str());
+    diffuseMap = loadTexture("resources/textures/bricks2.jpg");
+    normalMap  = loadTexture("resources/textures/bricks2_normal.jpg");
+    heightMap  = loadTexture("resources/textures/bricks2_disp.jpg");
     // shader configuration
     // --------------------
     shader.use();

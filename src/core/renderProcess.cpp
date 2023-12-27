@@ -96,7 +96,7 @@ void RenderProcess::initObjects() {
 //    objectList.push_back(bricks);
 
     Planet* planet = new Planet(camera, projection);
-    planet->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+    planet->setScale(glm::vec3(0.15f, 0.15f, 0.15f));
     Booth* booth = new Booth(camera, projection, planet);
     objectList.push_back(booth);
 

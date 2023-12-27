@@ -66,12 +66,12 @@ Skybox::Skybox(Camera *c, glm::mat4 *p) : RenderObject(c, p) {
     glBindVertexArray(0);
 
     std::vector<std::string> faces{
-            "right.jpg",
-            "left.jpg",
-            "top.jpg",
-            "bottom.jpg",
-            "front.jpg",
-            "back.jpg"
+            "right.png",
+            "left.png",
+            "top.png",
+            "bottom.png",
+            "front.png",
+            "back.png"
     };
 
     cubeMapTexture = loadCubeMap(faces);
@@ -85,11 +85,10 @@ unsigned int Skybox::loadCubeMap(std::vector<std::string> faces) {
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
         std::string path = "resources/cosmos/" + faces[i];
-        unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+        unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 4);
         if (data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
-            );
+                         0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
             stbi_image_free(data);
         } else {
             std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;

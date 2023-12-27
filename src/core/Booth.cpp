@@ -38,7 +38,7 @@ void Booth::setRenderObject(RenderObject *renderObject) {
     Booth::renderObject = renderObject;
     if (renderObject->getPosition() == glm::vec3(0.0f, 0.0f, 0.0f)) {
         objPosition = getPosition();
-        objPosition.y += 1.0f;
+        objPosition.y += 0.9f;
     } else {
         objPosition = renderObject->getPosition();
     }

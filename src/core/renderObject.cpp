@@ -53,3 +53,11 @@ void RenderObject::setDeltaTime(double deltaTime) {
 double RenderObject::getDeltaTime() const {
     return deltaTime;
 }
+
+double RenderObject::getCurrentTime() const {
+    return currentTime;
+}
+
+void RenderObject::setCurrentTime(double currentTime) {
+    RenderObject::currentTime = currentTime;
+}

@@ -66,10 +66,14 @@ int main() {
         currentTime = glfwGetTime();
         deltaTime = currentTime - lastTime;
 
+        if ((int) currentTime - (int) lastTime == 1) {
+            std::cout << 1 / deltaTime << std::endl;
+        }
+
         processInput(window);
 
         camera->updateJumpPosition(deltaTime);
-        renderProcess->doRenderStep(deltaTime);
+        renderProcess->doRenderStep(deltaTime, currentTime);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

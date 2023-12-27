@@ -13,7 +13,7 @@ using std::vector;
 
 class RenderProcess {
 private:
-    double deltaTime;
+    double deltaTime, currentTime;
     int windowWidth, windowHeight;
     Skybox *skybox;
     vector<RenderObject *> objectList;
@@ -29,7 +29,7 @@ public:
 
     ~RenderProcess();
 
-    void doRenderStep(double deltaTime);
+    void doRenderStep(double deltaTime, double currentTime);
 
     void updatePerspective(int w, int h);
 };

@@ -7,6 +7,7 @@
 #include <core/renderProcess.h>
 #include <core/base.h>
 #include <core/Ground.h>
+#include <core/Booth.h>
 //#include <core/exampleCube.h>
 #include <core/CubeGroup.h>
 
@@ -95,6 +96,8 @@ void RenderProcess::initObjects() {
 //    objectList.push_back(bricks);
 
     Planet* planet = new Planet(camera, projection);
-    objectList.push_back(planet);
+    planet->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+    Booth* booth = new Booth(camera, projection, planet);
+    objectList.push_back(booth);
 
 }

@@ -11,6 +11,7 @@
 #include <utils/camera.h>
 #include <utils/shader.h>
 
+
 class RenderObject {
 private:
     int typeId;
@@ -44,11 +45,11 @@ public:
 
     const glm::vec3 &getPosition() const;
 
-    void setPosition(const glm::vec3 &position);
+    virtual void setPosition(const glm::vec3 &position);
 
     const glm::vec3 &getScale() const;
 
-    void setScale(const glm::vec3 &scale);
+    virtual void setScale(const glm::vec3 &scale);
 
     void genBuffer(unsigned int &VAO, unsigned int &VBO);
 

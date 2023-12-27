@@ -12,6 +12,7 @@
 
 #include <core/skybox.h>
 #include <core/bricks.h>
+#include <core/planet.h>
 
 RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
     init(c, w, h);
@@ -92,6 +93,10 @@ void RenderProcess::initObjects() {
 //    CubeGroup* cube = new CubeGroup(camera, projection);
 //    objectList.push_back(cube);
 
-    Bricks* bricks = new Bricks(camera,projection);
-    objectList.push_back(bricks);
+//    Bricks* bricks = new Bricks(camera,projection);
+//    objectList.push_back(bricks);
+
+    Planet* planet = new Planet(camera, projection);
+    objectList.push_back(planet);
+
 }

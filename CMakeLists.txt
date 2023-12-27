@@ -14,7 +14,9 @@ set(CMAKE_CXX_STANDARD 17)
 #set(src_LIB src/3rd-party/*)
 # 配置第三方库
 file(GLOB_RECURSE src_LIB src/3rd-party/*)
-add_library(LIB STATIC ${src_LIB})
+add_library(LIB STATIC ${src_LIB}
+        src/utils/model.h
+        src/utils/mesh.h)
 
 # 配置核心代码
 file(GLOB_RECURSE src_Core src/core/* src/utils/*)
@@ -24,6 +26,8 @@ include_directories(./src/ ./src/core/ ./src/3rd-party)
 add_executable(Project src/main.cpp ${src_Core}
         src/core/bricks.cpp
         src/core/bricks.h
+        src/core/planet.cpp
+        src/core/planet.h
 )
 target_link_libraries(Project LIB)
 
@@ -50,3 +54,6 @@ add_dependencies(Project CopyResources)
 # mac下链接库
 target_link_libraries(Project "-framework OpenGL")
 target_link_libraries(Project "-framework GLUT")
+
+find_package(assimp REQUIRED) # 添加assimp
+target_link_libraries(Project assimp::assimp)

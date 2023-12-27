@@ -84,7 +84,7 @@ unsigned int Skybox::loadCubeMap(std::vector<std::string> faces) {
 
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
-        std::string path = "resources/skybox/" + faces[i];
+        std::string path = "resources/cosmos/" + faces[i];
         unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
         if (data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

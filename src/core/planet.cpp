@@ -5,7 +5,6 @@
 #include "planet.h"
 #include "utils/model.h"
 #include <stb_image.h>
-#include <utils/filesystem.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -17,7 +16,7 @@ void Planet::render() {
 
     // load models
     // -----------
-    Model ourModel(FileSystem::getPath("resources/obj/planet/planet.obj"));
+    Model ourModel("resources/obj/planet/planet.obj");
     ourShader.use();
 
     // view/projection transformations

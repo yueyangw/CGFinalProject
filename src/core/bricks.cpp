@@ -5,7 +5,6 @@
 #include "bricks.h"
 #include <core/base.h>
 #include <stb_image.h>
-#include <utils/filesystem.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 unsigned int loadTexture(char const * path)

@@ -157,7 +157,7 @@ void Bricks::render() {
     shader->setInt("diffuseMap", 0);
     shader->setInt("normalMap", 1);
     shader->setInt("depthMap", 2);
-    glm::vec3 lightPos(-0.3f, 1.0f, 0.5f);
+//    glm::vec3 lightPos(-0.3f, 1.0f, 0.5f);
 
     // configure view/projection matrices
     setVPMatrix();
@@ -165,7 +165,8 @@ void Bricks::render() {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, getPosition());
     model = glm::scale(model, getScale());
-    model = glm::rotate(model, (float) getCurrentTime() / 10, glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, -315.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::vec3 lightPos(-0.3f, 1.0f, 0.5f);
     shader->setMat4("model", model);
     shader->setVec3("viewPos", camera->Position);
     shader->setVec3("lightPos", lightPos);

@@ -97,9 +97,9 @@ void LightingCube::render() {
             transformedVertices[vertexIndex] = getScale()[0]*(verticesAll[vertexIndex] + cubePositions[i * 3]);
             transformedVertices[vertexIndex + 1] = getScale()[1]*(verticesAll[vertexIndex + 1] +cubePositions[i * 3 + 1]);
             transformedVertices[vertexIndex + 2] = getScale()[2]*(verticesAll[vertexIndex + 2] + cubePositions[i * 3 + 2]);
-            transformedVertices[vertexIndex + 3] = verticesAll[vertexIndex + 3];
-            transformedVertices[vertexIndex + 4] = verticesAll[vertexIndex + 4];
-            transformedVertices[vertexIndex + 5] = verticesAll[vertexIndex + 5];
+            transformedVertices[vertexIndex + 3] = verticesAll[vertexIndex + 3]*getScale()[2]*3;
+            transformedVertices[vertexIndex + 4] = verticesAll[vertexIndex + 4]*getScale()[2]*3;
+            transformedVertices[vertexIndex + 5] = verticesAll[vertexIndex + 5]*getScale()[2]*3;
         }
     }
 

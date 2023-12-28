@@ -66,12 +66,12 @@ Skybox::Skybox(Camera *c, glm::mat4 *p) : RenderObject(c, p) {
     glBindVertexArray(0);
 
     std::vector<std::string> faces{
-            "right.png",
-            "left.png",
-            "top.png",
-            "bottom.png",
-            "front.png",
-            "back.png"
+            "right.jpg",
+            "left.jpg",
+            "top.jpg",
+            "bottom.jpg",
+            "front.jpg",
+            "back.jpg"
     };
 
     cubeMapTexture = loadCubeMap(faces);
@@ -84,7 +84,7 @@ unsigned int Skybox::loadCubeMap(std::vector<std::string> faces) {
 
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
-        std::string path = "resources/cosmos/" + faces[i];
+        std::string path = "resources/skybox/" + faces[i];
         unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 4);
         if (data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

@@ -104,9 +104,6 @@ void RenderProcess::initObjects() {
     magmaBooth->setPosition(glm::vec3(2, 0, 0));
     objectList.push_back(magmaBooth);
 
-//    Bricks* bricks = new Bricks(camera,projection);
-//    objectList.push_back(bricks);
-
     // 火星
     ObjFileObject* planet = new ObjFileObject(camera, projection, "resources/obj/planet/planet.obj");
     planet->setScale(glm::vec3(0.15f, 0.15f, 0.15f));
@@ -120,5 +117,11 @@ void RenderProcess::initObjects() {
     Booth* booth1 = new Booth(camera, projection, planet1);
     booth1->setPosition(glm::vec3(2, 0, -4));
     objectList.push_back(booth1);
+
+    Bricks* bricks = new Bricks(camera,projection);
+    bricks->setScale(glm::vec3(0.5, 0.5, 0.5));
+    Booth *bricksBooth = new Booth(camera, projection, bricks);
+    bricksBooth->setPosition(glm::vec3(2, 0, -8));
+    objectList.push_back(bricksBooth);
 
 }

@@ -139,37 +139,37 @@ void renderQuad()
 }
 
 Bricks::Bricks(Camera* c, glm::mat4 *p) : RenderObject(c, p) {
-}
+    shader = new Shader("shaders/5.1.parallax_mapping.vert", "shaders/5.1.parallax_mapping.frag");
 
-void Bricks::render() {
-    Shader shader("shaders/5.1.parallax_mapping.vert", "shaders/5.1.parallax_mapping.frag");
-
-    // load textures
-    // -------------
     diffuseMap = loadTexture("resources/textures/bricks2.jpg");
     normalMap  = loadTexture("resources/textures/bricks2_normal.jpg");
     heightMap  = loadTexture("resources/textures/bricks2_disp.jpg");
+}
+
+void Bricks::render() {
+
+    // load textures
+    // -------------
+
     // shader configuration
     // --------------------
-    shader.use();
-    shader.setInt("diffuseMap", 0);
-    shader.setInt("normalMap", 1);
-    shader.setInt("depthMap", 2);
-    glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
+    shader->use();
+    shader->setInt("diffuseMap", 0);
+    shader->setInt("normalMap", 1);
+    shader->setInt("depthMap", 2);
+    glm::vec3 lightPos(-0.3f, 1.0f, 0.5f);
 
     // configure view/projection matrices
-    glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)1000 / (float)750, 0.1f, 100.0f);
-    glm::mat4 view = camera->GetViewMatrix();
-    shader.use();
-    shader.setMat4("projection", projection);
-    shader.setMat4("view", view);
+    setVPMatrix();
     // render parallax-mapped quad
     glm::mat4 model = glm::mat4(1.0f);
-//    model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show parallax mapping from multiple directions
-    shader.setMat4("model", model);
-    shader.setVec3("viewPos", camera->Position);
-    shader.setVec3("lightPos", lightPos);
-    shader.setFloat("heightScale", 0.1);
+    model = glm::translate(model, getPosition());
+    model = glm::scale(model, getScale());
+    model = glm::rotate(model, (float) getCurrentTime() / 10, glm::vec3(0.0f, 1.0f, 0.0f));
+    shader->setMat4("model", model);
+    shader->setVec3("viewPos", camera->Position);
+    shader->setVec3("lightPos", lightPos);
+    shader->setFloat("heightScale", 0.1);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, diffuseMap);
     glActiveTexture(GL_TEXTURE1);

@@ -13,13 +13,14 @@ enum Camera_Movement {
     BACKWARD,
     LEFT,
     RIGHT,
-    UP
+    UP,
+    OTHER,
 };
 
 // Default camera values
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 2.5f;
+const float SPEED = 2.0f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
@@ -44,6 +45,8 @@ public:
     float cameraHeight;
     float jumpVelocity;
     bool isJumping;
+    bool pressSpace;
+    int jumpTime;
 
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
@@ -74,7 +77,13 @@ public:
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    void ProcessKeyboard(Camera_Movement direction, float deltaTime) {
+    void ProcessKeyboard(Camera_Movement direction, float deltaTime, bool speedUp = false) {
+
+        if (direction == OTHER) {
+            pressSpace = false;
+            return;
+        }
+
         float y = Position.y;
 
         glm::vec3 front = Front;
@@ -82,6 +91,8 @@ public:
         front *= (1/glm::length(front));
 
         float velocity = MovementSpeed * deltaTime;
+        if (speedUp)
+            velocity *= 1.5;
         if (direction == FORWARD)
             Position += front * velocity;
         if (direction == BACKWARD)
@@ -132,6 +143,7 @@ public:
             if (Position.y <= cameraHeight) {
                 Position.y = cameraHeight;
                 isJumping = false;
+                jumpTime = 0;
             }
         }
     }
@@ -155,7 +167,13 @@ private:
         if (!isJumping) {
             jumpVelocity = 3.5f;
             isJumping = true;
+        } else {
+            if (!pressSpace && jumpTime < 1) {
+                jumpVelocity = 3.0f;
+                jumpTime++;
+            }
         }
+        pressSpace = true;
     }
 };
 

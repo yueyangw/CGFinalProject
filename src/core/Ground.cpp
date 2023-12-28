@@ -6,27 +6,14 @@
 
 Ground::Ground(Camera *c, glm::mat4 *p) : RenderObject(c, p) {
     camera = c, projection = p;
-    blockPositions = {
-            glm::vec3(0.0f, 0.0f, 2.0f),
-            glm::vec3(-1.0f, 0.0f, 2.0f),
-            glm::vec3(1.0f, 0.0f, 2.0f),
-
-            glm::vec3(0.0f, 0.0f, 1.0f),
-            glm::vec3(-1.0f, 0.0f, 1.0f),
-            glm::vec3(1.0f, 0.0f, 1.0f),
-
-            glm::vec3(0.0f, 0.0f, 0.0f),
-            glm::vec3(-1.0f, 0.0f, 0.0f),
-            glm::vec3(1.0f, 0.0f, 0.0f),
-
-            glm::vec3(0.0f, 0.0f, -1.0f),
-            glm::vec3(-1.0f, 0.0f, -1.0f),
-            glm::vec3(1.0f, 0.0f, -1.0f),
-
-            glm::vec3(0.0f, 0.0f, -2.0f),
-            glm::vec3(-1.0f, 0.0f, -2.0f),
-            glm::vec3(1.0f, 0.0f, -2.0f),
-    };
+    int zmin = -10, zmax = 4, xmin = -2, xmax = 2;
+    int num = (zmax - zmin + 1) * (xmax - xmin + 1);
+    blockPositions.resize(num);
+    for (int z = zmin; z <= zmax; z++) {
+        for (int x = xmin; x <= xmax; x++) {
+            blockPositions.push_back(glm::vec3(x, 0, z));
+        }
+    }
     for (glm::vec3 pos: blockPositions) {
         GroundBlock *block = new GroundBlock(camera, projection);
         block->setPosition(pos);
@@ -45,10 +32,11 @@ Ground::~Ground() {
 
 bool Ground::inBlock(GroundBlock *block) {
     float x = camera->Position.x, z = camera->Position.z;
+    float isJumping = camera->isJumping;
     glm::vec3 pos = block->getPosition(), scale = block->getScale();
     float xmin = pos.x - scale.x / 2, xmax = pos.x + scale.x / 2;
     float zmin = pos.z - scale.z / 2, zmax = pos.z + scale.z / 2;
-    if (x > xmin && x < xmax && z > zmin && z < zmax) {
+    if (x > xmin && x < xmax && z > zmin && z < zmax && !isJumping) {
         return true;
     }
     return false;

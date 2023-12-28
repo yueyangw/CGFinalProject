@@ -13,7 +13,7 @@ Booth::Booth(Camera *c, glm::mat4 *p, RenderObject *renderObject1) : RenderObjec
     setPosition(position);
     setScale(scale);
     floatSpeed = 1.0;
-    floatRange = 0.1;
+    floatRange = 0.05;
 }
 
 void Booth::render() {
@@ -46,6 +46,9 @@ void Booth::setRenderObject(RenderObject *renderObject) {
 
 void Booth::setPosition(const glm::vec3 &position) {
     base->setPosition(position);
+    glm::vec3 pos = objPosition;
+    pos.x = position.x, pos.z = position.z;
+    objPosition = pos;
     RenderObject::setPosition(position);
 }
 

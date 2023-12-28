@@ -13,16 +13,17 @@ void GroundBlock::init(float s, float r) {
     isAnimate = false;
     scale = s, radius = r;
 
+    float red = 0.8f, green = 0.8f, blue = 0.8f;
     float x = s * (0.5f - r), y = s * 0.5f;
     float outerPolygon[] = {
-            x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-            -x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-            -y, x, 0.0f, 1.0f, 1.0f, 1.0f,
-            -y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-            -x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-            x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-            y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-            y, x, 0.0f, 1.0f, 1.0f, 1.0f,
+            x, y, 0.0f, red, green, blue,
+            -x, y, 0.0f, red, green, blue,
+            -y, x, 0.0f, red, green, blue,
+            -y, -x, 0.0f, red, green, blue,
+            -x, -y, 0.0f, red, green, blue,
+            x, -y, 0.0f, red, green, blue,
+            y, -x, 0.0f, red, green, blue,
+            y, x, 0.0f, red, green, blue,
     };
     glBindVertexArray(VAO);
 
@@ -41,14 +42,14 @@ void GroundBlock::init(float s, float r) {
 
     x *= 0.8f, y *= 0.8f;
     float innerPolygon[] = {
-            x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-            -x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-            -y, x, 0.0f, 1.0f, 1.0f, 1.0f,
-            -y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-            -x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-            x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-            y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-            y, x, 0.0f, 1.0f, 1.0f, 1.0f,
+            x, y, 0.0f, red, green, blue,
+            -x, y, 0.0f, red, green, blue,
+            -y, x, 0.0f, red, green, blue,
+            -y, -x, 0.0f, red, green, blue,
+            -x, -y, 0.0f, red, green, blue,
+            x, -y, 0.0f, red, green, blue,
+            y, -x, 0.0f, red, green, blue,
+            y, x, 0.0f, red, green, blue,
     };
 
     glBindVertexArray(innerVAO);
@@ -97,19 +98,20 @@ void GroundBlock::render() {
 
         float x = scale * (0.5f - radius), y = scale * 0.5f;
         x *= animateRate, y *= animateRate;
-        if (animateRate >= 0.8f) {
+        if (animateRate >= 1.0f) {
             isAnimate = false;
         }
         animateRate += getDeltaTime() * animateSpeed;
+        float red = 0.8f, green = 0.8f, blue = 0.8f;
         float innerPolygon[] = {
-                x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-                -x, y, 0.0f, 1.0f, 1.0f, 1.0f,
-                -y, x, 0.0f, 1.0f, 1.0f, 1.0f,
-                -y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-                -x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-                x, -y, 0.0f, 1.0f, 1.0f, 1.0f,
-                y, -x, 0.0f, 1.0f, 1.0f, 1.0f,
-                y, x, 0.0f, 1.0f, 1.0f, 1.0f,
+                x, y, 0.0f, red, green, blue,
+                -x, y, 0.0f, red, green, blue,
+                -y, x, 0.0f, red, green, blue,
+                -y, -x, 0.0f, red, green, blue,
+                -x, -y, 0.0f, red, green, blue,
+                x, -y, 0.0f, red, green, blue,
+                y, -x, 0.0f, red, green, blue,
+                y, x, 0.0f, red, green, blue,
         };
 
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(innerPolygon), innerPolygon);
@@ -125,7 +127,7 @@ void GroundBlock::render() {
 
 void GroundBlock::emitAnimate() {
     isAnimate = true;
-    animateRate = 0.01f;
+    animateRate = 0.0001f;
 }
 
 void GroundBlock::setInBlock(bool inBlock) {

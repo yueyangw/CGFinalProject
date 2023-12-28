@@ -11,8 +11,6 @@ void processInput(GLFWwindow *window);
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
-
 // settings
 const unsigned int SCR_WIDTH = 1000;
 const unsigned int SCR_HEIGHT = 750;
@@ -45,7 +43,6 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -91,16 +88,22 @@ void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+    bool speedUp = false;
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        speedUp = true;
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera->ProcessKeyboard(FORWARD, deltaTime);
+        camera->ProcessKeyboard(FORWARD, deltaTime, speedUp);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera->ProcessKeyboard(BACKWARD, deltaTime);
+        camera->ProcessKeyboard(BACKWARD, deltaTime, speedUp);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera->ProcessKeyboard(LEFT, deltaTime);
+        camera->ProcessKeyboard(LEFT, deltaTime, speedUp);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera->ProcessKeyboard(RIGHT, deltaTime);
+        camera->ProcessKeyboard(RIGHT, deltaTime, speedUp);
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        camera->ProcessKeyboard(UP, deltaTime);
+        camera->ProcessKeyboard(UP, deltaTime, speedUp);
+    else
+        camera->ProcessKeyboard(OTHER, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -129,8 +132,4 @@ void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {
     lastY = ypos;
 
     camera->ProcessMouseMovement(xoffset, yoffset);
-}
-
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
-    camera->ProcessMouseScroll(static_cast<float>(yoffset));
 }

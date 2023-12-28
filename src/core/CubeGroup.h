@@ -23,6 +23,9 @@ private:
 public:
     CubeGroup(Camera*, glm::mat4*);
     void render() override;
+
+    void setScale(const glm::vec3 &scale) override;
+
 };
 
 

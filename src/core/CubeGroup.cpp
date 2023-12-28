@@ -28,10 +28,19 @@ CubeGroup::CubeGroup(Camera *c, glm::mat4 *p) : RenderObject(c, p) {
 
 
 void CubeGroup::render() {
-
+    for (int i = 0; i < scaleData.size(); i++) {
+        cubes[i]->setScale(scaleData[i]);
+    }
     for (LightingCube *lightingCube: cubes) {
-
+        lightingCube->setPosition(getPosition());
         lightingCube->render();
     }
+}
+
+void CubeGroup::setScale(const glm::vec3 &scale) {
+    for (auto &s : scaleData) {
+        s = s * scale;
+    }
+    RenderObject::setScale(scale);
 }
 

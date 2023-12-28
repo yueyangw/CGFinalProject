@@ -10,6 +10,7 @@
 #include <core/Booth.h>
 //#include <core/exampleCube.h>
 #include <core/CubeGroup.h>
+#include <core/MagmaBlock.h>
 
 #include <core/skybox.h>
 #include <core/bricks.h>
@@ -89,8 +90,19 @@ void RenderProcess::initObjects() {
 //    Base* base = new Base(camera, projection);
 //    base->setPosition(cubePositions[0]);
 //
+    // 立方体
     CubeGroup* cube = new CubeGroup(camera, projection);
-    objectList.push_back(cube);
+    cube->setScale(glm::vec3(0.4f, 0.4f, 0.4f));
+    Booth *cubeBooth = new Booth(camera, projection, cube);
+    cubeBooth->setPosition(glm::vec3(-2, 0, 0));
+    objectList.push_back(cubeBooth);
+
+    // 岩浆块
+    MagmaBlock* magma = new MagmaBlock(camera, projection);
+    magma->setScale(glm::vec3(0.7f, 0.7f, 0.7f));
+    Booth *magmaBooth = new Booth(camera, projection, magma);
+    magmaBooth->setPosition(glm::vec3(2, 0, 0));
+    objectList.push_back(magmaBooth);
 
 //    Bricks* bricks = new Bricks(camera,projection);
 //    objectList.push_back(bricks);
@@ -99,14 +111,14 @@ void RenderProcess::initObjects() {
     ObjFileObject* planet = new ObjFileObject(camera, projection, "resources/obj/planet/planet.obj");
     planet->setScale(glm::vec3(0.15f, 0.15f, 0.15f));
     Booth* booth = new Booth(camera, projection, planet);
-    booth->setPosition(glm::vec3(-2, 0, -2));
+    booth->setPosition(glm::vec3(-2, 0, -4));
     objectList.push_back(booth);
 
-    // 火星
+    // 背包
     ObjFileObject* planet1 = new ObjFileObject(camera, projection, "resources/obj/backpack/backpack.obj");
     planet1->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
     Booth* booth1 = new Booth(camera, projection, planet1);
-    booth1->setPosition(glm::vec3(2, 0, -2));
+    booth1->setPosition(glm::vec3(2, 0, -4));
     objectList.push_back(booth1);
 
 }

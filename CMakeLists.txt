@@ -23,12 +23,7 @@ file(GLOB_RECURSE src_Core src/core/* src/utils/*)
 
 include_directories(./src/ ./src/core/ ./src/3rd-party)
 
-add_executable(Project src/main.cpp ${src_Core}
-        src/core/bricks.cpp
-        src/core/bricks.h
-        src/core/planet.cpp
-        src/core/planet.h
-)
+add_executable(Project src/main.cpp ${src_Core})
 target_link_libraries(Project LIB)
 
 # 构建时复制Shader

@@ -13,7 +13,7 @@
 
 #include <core/skybox.h>
 #include <core/bricks.h>
-#include <core/planet.h>
+#include <core/ObjFileObject.h>
 
 RenderProcess::RenderProcess(int w, int h, Camera *c) : windowWidth(w), windowHeight(h) {
     init(c, w, h);
@@ -96,15 +96,15 @@ void RenderProcess::initObjects() {
 //    objectList.push_back(bricks);
 
     // 火星
-    Planet* planet = new Planet(camera, projection);
+    ObjFileObject* planet = new ObjFileObject(camera, projection, "resources/obj/planet/planet.obj");
     planet->setScale(glm::vec3(0.15f, 0.15f, 0.15f));
     Booth* booth = new Booth(camera, projection, planet);
     booth->setPosition(glm::vec3(-2, 0, -2));
     objectList.push_back(booth);
 
     // 火星
-    Planet* planet1 = new Planet(camera, projection);
-    planet1->setScale(glm::vec3(0.15f, 0.15f, 0.15f));
+    ObjFileObject* planet1 = new ObjFileObject(camera, projection, "resources/obj/backpack/backpack.obj");
+    planet1->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
     Booth* booth1 = new Booth(camera, projection, planet1);
     booth1->setPosition(glm::vec3(2, 0, -2));
     objectList.push_back(booth1);

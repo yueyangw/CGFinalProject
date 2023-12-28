@@ -2,13 +2,13 @@
 // Created by Joyce on 2023/12/27.
 //
 
-#ifndef PROJECT_PLANET_H
-#define PROJECT_PLANET_H
+#ifndef PROJECT_OBJFILEOBJECT_H
+#define PROJECT_OBJFILEOBJECT_H
 
 #include "renderObject.h"
 #include "utils/model.h"
 
-class Planet : public RenderObject {
+class ObjFileObject : public RenderObject {
 
 private:
     unsigned int diffuseMap, normalMap, heightMap;
@@ -16,7 +16,7 @@ private:
     Model *ourModel;
 
 public:
-    Planet(Camera*, glm::mat4 *p);
+    ObjFileObject(Camera*, glm::mat4 *p, const std::string &);
     void render() override;
 };
 

@@ -17,6 +17,9 @@ RenderObject::RenderObject(Camera* c, glm::mat4 *p) {
 RenderObject::~RenderObject() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    if (shader != nullptr) {
+        delete shader;
+    }
 }
 
 void RenderObject::setVPMatrix() {

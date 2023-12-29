@@ -68,3 +68,8 @@ double Booth::getFloatRange() const {
 void Booth::setFloatRange(double floatRange) {
     Booth::floatRange = floatRange;
 }
+
+Booth::~Booth() {
+    delete renderObject;
+    delete base;
+}

@@ -15,6 +15,10 @@ ObjFileObject::ObjFileObject(Camera* c, glm::mat4 *p, const std::string &path) :
     setScale(glm::vec3(0.3f, 0.3f, 0.3f));
 }
 
+ObjFileObject::~ObjFileObject() {
+    delete ourModel;
+}
+
 void ObjFileObject::render() {
 
     shader->use();

@@ -21,6 +21,7 @@ private:
 
 public:
     Booth(Camera *c, glm::mat4 *p, RenderObject *renderObject1);
+    ~Booth();
     void render() override;
 
     void setPosition(const glm::vec3 &position) override;

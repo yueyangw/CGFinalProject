@@ -11,12 +11,12 @@
 class ObjFileObject : public RenderObject {
 
 private:
-    unsigned int diffuseMap, normalMap, heightMap;
     glm::mat4 view, projection;
     Model *ourModel;
 
 public:
     ObjFileObject(Camera*, glm::mat4 *p, const std::string &);
+    ~ObjFileObject();
     void render() override;
 };
 

@@ -44,3 +44,9 @@ void CubeGroup::setScale(const glm::vec3 &scale) {
     RenderObject::setScale(scale);
 }
 
+CubeGroup::~CubeGroup() {
+    for (auto *cube : cubes) {
+        delete cube;
+    }
+}
+

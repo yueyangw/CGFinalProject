@@ -97,12 +97,12 @@ void RenderProcess::initObjects() {
     cubeBooth->setPosition(glm::vec3(-2, 0, 0));
     objectList.push_back(cubeBooth);
 
-    // 岩浆块
-    MagmaBlock* magma = new MagmaBlock(camera, projection);
-    magma->setScale(glm::vec3(0.7f, 0.7f, 0.7f));
-    Booth *magmaBooth = new Booth(camera, projection, magma);
-    magmaBooth->setPosition(glm::vec3(2, 0, 0));
-    objectList.push_back(magmaBooth);
+    // 黄色立方体
+    CubeGroup* ycube = new CubeGroup(camera, projection);
+    ycube->setScale(glm::vec3(0.4f, 0.4f, 0.4f));
+    Booth *ycubeBooth = new Booth(camera, projection, cube);
+    ycubeBooth->setPosition(glm::vec3(2, 0, 0));
+    objectList.push_back(ycubeBooth);
 
     // 火星
     ObjFileObject* planet = new ObjFileObject(camera, projection, "resources/obj/planet/planet.obj");
@@ -118,10 +118,18 @@ void RenderProcess::initObjects() {
     booth1->setPosition(glm::vec3(2, 0, -4));
     objectList.push_back(booth1);
 
+    // 墙
     Bricks* bricks = new Bricks(camera,projection);
     bricks->setScale(glm::vec3(0.5, 0.5, 0.5));
     Booth *bricksBooth = new Booth(camera, projection, bricks);
     bricksBooth->setPosition(glm::vec3(2, 0, -8));
     objectList.push_back(bricksBooth);
+
+    // 岩浆块
+    MagmaBlock* magma = new MagmaBlock(camera, projection);
+    magma->setScale(glm::vec3(0.7f, 0.7f, 0.7f));
+    Booth *magmaBooth = new Booth(camera, projection, magma);
+    magmaBooth->setPosition(glm::vec3(-2, 0, -8));
+    objectList.push_back(magmaBooth);
 
 }

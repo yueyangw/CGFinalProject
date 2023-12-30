@@ -10,6 +10,7 @@
 #include <core/Booth.h>
 //#include <core/exampleCube.h>
 #include <core/CubeGroup.h>
+#include <core/CubeGroupYellow.h>
 #include <core/MagmaBlock.h>
 
 #include <core/skybox.h>
@@ -98,7 +99,7 @@ void RenderProcess::initObjects() {
     objectList.push_back(cubeBooth);
 
     // 黄色立方体
-    CubeGroup* ycube = new CubeGroup(camera, projection);
+    CubeGroupYellow* ycube = new CubeGroupYellow(camera, projection);
     ycube->setScale(glm::vec3(0.4f, 0.4f, 0.4f));
     Booth *ycubeBooth = new Booth(camera, projection, ycube);
     ycubeBooth->setPosition(glm::vec3(2, 0, 0));

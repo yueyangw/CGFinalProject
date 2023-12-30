@@ -100,7 +100,7 @@ void RenderProcess::initObjects() {
     // 黄色立方体
     CubeGroup* ycube = new CubeGroup(camera, projection);
     ycube->setScale(glm::vec3(0.4f, 0.4f, 0.4f));
-    Booth *ycubeBooth = new Booth(camera, projection, cube);
+    Booth *ycubeBooth = new Booth(camera, projection, ycube);
     ycubeBooth->setPosition(glm::vec3(2, 0, 0));
     objectList.push_back(ycubeBooth);
 
